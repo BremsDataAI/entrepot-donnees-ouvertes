@@ -1,8 +1,8 @@
-# Nom du projet
+# Entrepôt de Données 
 ---
 ![CI](https://github.com/BremsDataAI/entrepot-donnees-ouvertes/actions/workflows/ci.yml/badge.svg)
 
-Une phrase : quel problème, pour qui, avec quelles données.
+Les données publiques sénégalaises sont éparpillées (HDX, Banque mondiale, PAM, ANSD), dans des formats hétérogènes et sans indication de fraîcheur. Ce projet construit l’entrepôt fiable sur lequel s’appuient « Prix alimentaires », « Mobile money » et « Prévision des prix », plus un catalogue public qui dit ce qui existe, à quelle date et avec quelle qualité.
 
 ## Résultat
 
