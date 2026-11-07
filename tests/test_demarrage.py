@@ -1,4 +1,4 @@
-from modele_projet import main
+from entrepot_donnees_ouvertes import main
 
 
 def test_main_affiche_un_message(capsys):
