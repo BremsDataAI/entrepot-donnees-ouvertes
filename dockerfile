@@ -9,4 +9,4 @@ COPY src ./src
 RUN uv sync --locked --no-dev
 RUN useradd --create-home app
 USER app
-CMD ["/app/.venv/bin/modele-projet"]
+CMD ["/app/.venv/bin/entrepot-donnees-ouvertes"]

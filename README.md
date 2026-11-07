@@ -1,6 +1,6 @@
 # Nom du projet
 ---
-![CI](https://github.com/BremsDataAI/modele-projet/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/BremsDataAI/entrepot-donnees-ouvertes/actions/workflows/ci.yml/badge.svg)
 
 Une phrase : quel problème, pour qui, avec quelles données.
 

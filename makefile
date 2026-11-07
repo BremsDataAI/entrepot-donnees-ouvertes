@@ -16,5 +16,5 @@ test:
 check: lint test
 
 docker:
-	docker build -t modele-projet .
-	docker run --rm modele-projet
+	docker build -t entrepot-donnees-ouvertes .
+	docker run --rm entrepot-donnees-ouvertes
