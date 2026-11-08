@@ -1,0 +1,10 @@
+name: entrepot
+version: "1.0.0"
+profile: entrepot
+
+models:
+  entrepot:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

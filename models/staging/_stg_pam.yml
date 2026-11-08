@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: stg_pam__prix
+    description: "Un prix d'un produit sur un marché pour un mois."
+    columns:
+      - name: date_releve
+        data_tests: [not_null]
+      - name: prix
+        data_tests: [not_null]
+      - name: type_prix
+        data_tests: 
+          - accepted_values:
+              arguments:
+                values: ['Retail', 'Wholesale']
