@@ -1,0 +1,6 @@
+entrepot:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: entrepot.duckdb
