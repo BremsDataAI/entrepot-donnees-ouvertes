@@ -52,6 +52,15 @@ La mesure est la valeur de l'indice des prix calculé pour les produits alimenta
 Le grain dit exactement ce qu'est une ligne de la table de fait. 
 Nous définissons le grain ici comme : la valeur de l'indice des produits alimentaires, dans une unité, sur un mois. 
 
+La requête SQL permettant de vérifier que le grain choisi est correct, donc qu'il n'y a pas de doublons et pas de mélange de plusieurs grains est la suivante : 
+```sql
+SELECT indicateurs, Unit, Date, Value, count(*) AS N
+FROM ansd_ihpc
+GROUP BY all
+HAVING count(*) > 1
+ORDER BY count(*) DESC;
+```
+
 ## Identification des faits, des dimensions et de leurs attributs
 ---
 Cette partie concerne l'identification des tables de faits, des tables de dimensions ainsi que leurs attributs.
@@ -63,26 +72,37 @@ Cette partie concerne l'identification des tables de faits, des tables de dimens
 
 
 
-  ## Analyse de la table de l'inflation des prix à la consommation (Inflation, Consumer Prices) de la Banque Mondiale
-  ---
+## Analyse de la table de l'inflation des prix à la consommation (Inflation, Consumer Prices) de la Banque Mondiale
+---
 
-  Méthodologie : choisir une mesure, déclarer le grain, identifier les dimensions, identifier les faits.
+Méthodologie : choisir une mesure, déclarer le grain, identifier les dimensions, identifier les faits.
 
-  ## 1. Choisir une mesure
-  ---
-  La mesure est la valeur d'un indicateur.
+## 1. Choisir une mesure
+---
+La mesure est la valeur d'un indicateur.
 
-  ## 2. Déclarer le grain
-  ---
-  Le grain dit exactement ce que représente une ligne.
-  Nous définissons le grain ici comme : la valeur d'un indicateur pour un pays, sur une année.
+## 2. Déclarer le grain
+---
+Le grain dit exactement ce que représente une ligne.
+Nous définissons le grain ici comme : la valeur d'un indicateur pour un pays, sur une année.
 
-  ## 3. Identification des faits, des dimensions et de leurs attributs
-  ---
-  Cette partie concerne l'identification des tables de faits, des tables de dimensions ainsi que leurs attributs.
+La requête SQL permettant de vérifier que le grain choisi est correct, c'est-à-dire qu'il n'y a pas de doublon ou que plusieurs grains n'ont pas été mélangés est la suivante : 
+```sql
+SELECT "Country Name", "Indicator Name", Value, count(*) AS N
+FROM wb_cpi_annual
+GROUP BY ALL
+HAVING count(*) > 1
+ORDER BY count(*) DESC;
+```
+
+Aucun doublon n'a été retourné. 
+
+## 3. Identification des faits, des dimensions et de leurs attributs
+---
+Cette partie concerne l'identification des tables de faits, des tables de dimensions ainsi que leurs attributs.
 - Identification des faits
-  * fct_inflation (la valeur de l'inflation) : Value
+* fct_inflation (la valeur de l'inflation) : Value
 - Identification des dimensions
-  * dim_indicator (indicateur) : Indicator Name, Indicator Code
-  * dim_country (pays) : Country Name, Country Code
-  * dim_date (année) : Year 
+* dim_indicator (indicateur) : Indicator Name, Indicator Code
+* dim_country (pays) : Country Name, Country Code
+* dim_date (année) : Year 
