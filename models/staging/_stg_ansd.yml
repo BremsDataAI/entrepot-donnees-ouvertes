@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: stg_ansd__ihpc
+    description: "Une valeur d'un indice pour un mois."
+    columns:
+      - name: date
+        data_tests: [not_null]
+      - name: unite
+        description: "Colonne vide sensée contenir l'unité."
+      - name: indice
+        data_tests: [not_null]
+      - name: valeur
+        data_tests: [not_null]
