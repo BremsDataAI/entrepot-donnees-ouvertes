@@ -5,3 +5,9 @@ sources:
     tables:
       - name: pam_prix
         description: "Prix des marchés du PAM, fichier HDX, chargé tel quel."
+        
+      - name: wb_cpi_annual
+        description: "Inflation annuelle des prix à la consommation, chargé tel quel"
+
+      - name: ansd_ihpc
+        description: "Indice harmonisé des prix à la consommation (produits alimentaires), chargé tel quel"

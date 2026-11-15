@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: stg_wb__cpi_annual
+    description: "Une valeur d'un indicateur pour un pays sur un mois."
+    columns:
+      - name: annee
+        data_tests: [not_null]
+      - name: indicateur
+        data_tests: [not_null]
+      - name: pays
+        data_tests: [not_null]
+      - name: valeur
+        data_tests: [not_null]
