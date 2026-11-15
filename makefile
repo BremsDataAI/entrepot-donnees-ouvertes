@@ -13,7 +13,10 @@ format:
 test:
 	uv run pytest
 
-check: lint test
+dbt-build:
+	uv run dbt build
+
+check: lint test dbt-build
 
 docker:
 	docker build -t entrepot-donnees-ouvertes .
