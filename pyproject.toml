@@ -7,7 +7,9 @@ authors = [
     { name = "BremsDataAI", email = "344043925+BremsDataAI@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dbt-duckdb>=1.11.1",
+]
 
 [project.scripts]
 entrepot-donnees-ouvertes = "entrepot_donnees_ouvertes:main"
