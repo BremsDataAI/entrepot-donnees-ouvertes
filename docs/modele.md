@@ -35,6 +35,51 @@ Cette partie concerne l'identification des tables de faits, des tables de dimens
 - *Cas particulier* : attributs du relevé
 Les attributs 'priceflag', 'pricetype', et 'currency' sont des attributs du relevé. Ils peuvent être rattachés à la table de faits. 
 
+### 4. Modélisation dimensionnelle
+
+Le schéma suivant représente le modèle en étoile retenu.
+Il présente la table de faits centrale et les dimensions qui permettent d'analyser les observations.
+```mermaid
+
+erDiagram
+    DIM_PRODUCT ||--o{ FCT_PRIX : "concerne"
+    DIM_MARKET ||--o{ FCT_PRIX : "est releve sur"
+    DIM_DATE ||--o{ FCT_PRIX : "est releve a"
+
+    DIM_PRODUCT {
+        int product_key PK
+        string commodity
+        string commodity_id
+        string category
+        string unit
+    }
+
+    DIM_MARKET {
+        int market_key PK
+        string market
+        string market_id
+        string admin1
+        string admin2
+        float latitude
+        float longitude
+    }
+
+    DIM_DATE {
+        int date_key PK
+        date date
+    }
+
+    FCT_PRIX {
+        int product_key FK
+        int market_key FK
+        int date_key FK
+        float price
+        float usdprice
+        string priceflag
+        string pricetype
+        string currency
+    }
+```
 
 
 
@@ -47,7 +92,7 @@ Méthodologie : choisir une mesure, déclarer le grain, identifier les dimension
 ---
 La mesure est la valeur de l'indice des prix calculé pour les produits alimentaires.
 
-## Déclarer le grain
+## 2. Déclarer le grain
 ---
 Le grain dit exactement ce qu'est une ligne de la table de fait. 
 Nous définissons le grain ici comme : la valeur de l'indice des produits alimentaires, dans une unité, sur un mois. 
@@ -61,7 +106,7 @@ HAVING count(*) > 1
 ORDER BY count(*) DESC;
 ```
 
-## Identification des faits, des dimensions et de leurs attributs
+## 3. Identification des faits, des dimensions et de leurs attributs
 ---
 Cette partie concerne l'identification des tables de faits, des tables de dimensions ainsi que leurs attributs.
 - Identification des faits
@@ -70,6 +115,34 @@ Cette partie concerne l'identification des tables de faits, des tables de dimens
   * dim_unit (unite) : Unit
   * dim_date (date) : Date
 
+### 4. Modélisation dimensionnelle
+
+Le schéma suivant représente le modèle en étoile retenu.
+Il présente la table de faits centrale et les dimensions qui permettent d'analyser les observations.
+```mermaid
+
+erDiagram
+    DIM_DATE ||--o{ FCT_INDICE : "correspond a"
+    DIM_UNIT ||--o{ FCT_INDICE : "est exprime dans"
+
+    DIM_DATE {
+        int date_key PK
+        date date
+        int annee
+        int mois
+    }
+
+    DIM_UNIT {
+        int unit_key PK
+        string unite
+    }
+
+    FCT_INDICE {
+        int date_key FK
+        int unit_key FK
+        float valeur
+    }
+```
 
 
 ## Analyse de la table de l'inflation des prix à la consommation (Inflation, Consumer Prices) de la Banque Mondiale
@@ -106,3 +179,37 @@ Cette partie concerne l'identification des tables de faits, des tables de dimens
 * dim_indicator (indicateur) : Indicator Name, Indicator Code
 * dim_country (pays) : Country Name, Country Code
 * dim_date (année) : Year 
+
+### 4. Modélisation dimensionnelle
+
+Le schéma suivant représente le modèle en étoile retenu.
+Il présente la table de faits centrale et les dimensions qui permettent d'analyser les observations.
+```mermaid
+
+erDiagram
+    DIM_DATE ||--o{ FCT_INDICE : "correspond a"
+    DIM_UNIT ||--o{ FCT_INDICE : "est exprime dans"
+    DIM_INDICATEUR ||--o{ FCT_INDICE : "identifie"
+
+    DIM_DATE {
+        int date_key PK
+        date date
+    }
+
+    DIM_UNIT {
+        int unit_key PK
+        string unite
+    }
+
+    DIM_INDICATEUR {
+        int indicateur_key PK
+        string indicateur
+    }
+
+    FCT_INDICE {
+        int date_key FK
+        int unit_key FK
+        int indicateur_key FK
+        float valeur
+    }
+```
