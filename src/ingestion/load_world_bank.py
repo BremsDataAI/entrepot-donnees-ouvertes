@@ -12,11 +12,7 @@ data_dir.mkdir(parents=True, exist_ok=True)
 
 csv_path = data_dir / "API_FP.CPI.TOTL.ZG_DS2_en_csv_v2_259659.csv"
 
-url = (
-    "https://api.worldbank.org/v2/country/sn/"
-    "indicator/FP.CPI.TOTL.ZG"
-    "?date=2000:2025&downloadformat=csv"
-)
+url = "https://api.worldbank.org/v2/en/indicator/FP.CPI.TOTL.ZG?downloadformat=csv"
 
 request = Request(url, headers={"User-Agent": "Mozilla/5.0"})
 
