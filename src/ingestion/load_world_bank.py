@@ -10,10 +10,7 @@ root = Path(__file__).resolve().parents[2]
 data_dir = root / "data/raw/world_bank"
 data_dir.mkdir(parents=True, exist_ok=True)
 
-csv_path = (
-    data_dir
-    / "API_FP.CPI.TOTL.ZG_DS2_en_csv_v2_259659.csv"
-)
+csv_path = data_dir / "API_FP.CPI.TOTL.ZG_DS2_en_csv_v2_259659.csv"
 
 url = (
     "https://api.worldbank.org/v2/country/sn/"
@@ -30,14 +27,11 @@ with ZipFile(BytesIO(archive_data)) as archive:
     csv_files = [
         name
         for name in archive.namelist()
-        if name.startswith("API_FP.CPI.TOTL.ZG_DS2_en_csv_v2_")
-        and name.endswith(".csv")
+        if name.startswith("API_FP.CPI.TOTL.ZG_DS2_en_csv_v2_") and name.endswith(".csv")
     ]
 
     if not csv_files:
-        raise RuntimeError(
-            "Aucun fichier CSV CPI trouvé dans l'archive."
-        )
+        raise RuntimeError("Aucun fichier CSV CPI trouvé dans l'archive.")
 
     with archive.open(csv_files[0]) as source:
         csv_path.write_bytes(source.read())
