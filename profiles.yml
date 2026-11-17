@@ -4,3 +4,13 @@ entrepot:
     dev:
       type: duckdb
       path: entrepot.duckdb
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: DBT_ENTREPOT
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH') }}"
+      role: TRANSFORMER
+      warehouse: WH_ENTREPOT
+      database: ENTREPOT
+      schema: STAGING
+      threads: 4
